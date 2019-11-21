@@ -1,0 +1,182 @@
+<div class="login-block">
+    <div class="container">
+	<div class="row">
+		<div class="col-md-4 login-sec">
+		    <h2 class="text-center">Bienvenido</h2>
+
+        <form (ngSubmit)="login(f)" class="login-form" #f="ngForm" >
+
+            <label for="exampleInputEmail1" class="text-uppercase">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="usuario.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" #email="ngModel" required email>
+
+            <div *ngIf="((email.errors?.required) && (email.dirty)) || ((email.touched) && (!email.errors?.pattern) && (email.errors?.required))" class="">
+              <p style="color:red">Este campo es obligatorio</p>
+            </div>
+            <div *ngIf="email.errors?.pattern" class="">
+              <p style="color:red">*El email es invalido</p>
+            </div>
+              <br>
+            <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
+            <input type="password" required class="form-control" [(ngModel)]="usuario.password" name="password" #password="ngModel">
+            <div style="color:red" *ngIf="(password.invalid) && (password.touched)" class="">
+              Este campo es obligatorio
+            </div>
+            <br>
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input">
+              <small>Recordarme</small>
+            </label>
+            <br>
+            <button type="submit" class="btn btn-login float-right">Log in</button>
+
+          </form>
+
+<br><br><hr>
+<label for="">No tiene una cuenta?</label>
+<br><br>
+  <div>
+    <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-lg btn-block btn btn-outline-danger">Registrarse</button>
+</div>
+		</div>
+		<div class="col-md-8 banner-sec">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                 <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  </ol>
+            <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+      <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide">
+      <div class="carousel-caption d-none d-md-block">
+        <div class="banner-text">
+            <h2>This is Heaven</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+        </div>
+  </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block img-fluid" src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg" alt="First slide">
+      <div class="carousel-caption d-none d-md-block">
+        <div class="banner-text">
+            <h2>This is Heaven</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+        </div>
+    </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block img-fluid" src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg" alt="First slide">
+      <div class="carousel-caption d-none d-md-block">
+        <div class="banner-text">
+            <h2>This is Heaven</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+        </div>
+    </div>
+  </div>
+            </div>
+
+		</div>
+	</div>
+</div>
+
+<!--MODAL-->
+
+<div class="modal modalup fade bd-example-modal-lg" id="ModalRegistro" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div  class="modal-content">
+      <div style="height:100px;" class="jumbotron home jumbotron-fluid bg-white form-group">
+        <div class="animated full-expand fadeIn" class="">
+          <h1 style="color:#DE6262;font-weight:500;font-size:45px" class="text-center animated fadeIn fast display-4 text"><i style="color:gray;margin-left:35px" class="fas fa-users-cog"></i> Registro</h1>
+          <hr>
+    </div>
+  </div>
+  <div class="m-3">
+    <div class="">
+      <form (ngSubmit)="registrar(formRegistro)"  class="login-form" name="formRegistro" #formRegistro="ngForm" >
+        <div id="myProgress">
+          <div id="myBar"></div>
+        </div>
+          <br>
+          <input type="text" required class="form-control" [(ngModel)]="registro.nombre" name="nombre" #nombre="ngModel" placeholder="Nombre">
+          <div style="color:red" *ngIf="(nombre.invalid) && (nombre.touched)" class="">
+            Este campo es obligatorio
+          </div>
+          <br>
+          <input type="number" required class="form-control" [(ngModel)]="registro.edad" name="edad" #edad="ngModel" placeholder="Edad">
+          <div style="color:red" *ngIf="(edad.invalid) && (edad.touched)" class="">
+            Este campo es obligatorio
+          </div>
+          <br>
+          <input type="text" required class="form-control" [(ngModel)]="registro.ciudad" name="ciudad" #ciudad="ngModel" placeholder="Ciudad">
+          <div style="color:red" *ngIf="(ciudad.invalid) && (ciudad.touched)" class="">
+            Este campo es obligatorio
+          </div>
+          <br>
+          <input type="text" required class="form-control" [(ngModel)]="registro.direccion" name="direccion" #direccion="ngModel" placeholder="Dirección">
+          <div style="color:red" *ngIf="(direccion.invalid) && (direccion.touched)" class="">
+            Este campo es obligatorio
+          </div>
+          <br>
+          <input type="email" class="form-control" [(ngModel)]="registro.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" #email="ngModel" required email placeholder="Email">
+
+          <div *ngIf="(email.invalid) && (email.touched) && (!email.errors?.pattern)" class="">
+            <p style="color:red">Este campo es obligatorio</p>
+          </div>
+          <div *ngIf="email.errors?.pattern" class="">
+            <p style="color:red">*El email es invalido</p>
+          </div>
+
+          <br>
+        <input type="password" required class="form-control" [(ngModel)]="registro.password" name="password" #password="ngModel" placeholder="Contraseña">
+        <div style="color:red" *ngIf="(password.invalid) && (password.touched)" class="">
+          Este campo es obligatorio
+        </div>
+        <br>
+
+        <div *ngIf="FormularioLLeno" class="alert alert-danger" role="alert">
+
+  Debe diligenciar el formulario.
+</div>
+
+<div *ngIf="ErroEmail" class="alert alert-danger" role="alert">
+
+El email ingresado ya se encuentra registrado.
+</div>
+
+<div *ngIf="RegistroConExito" class="alert alert-success" role="alert">
+
+ha sido registrado con Exito.
+</div>
+
+            <button type="submit" class="btn btn-lg btn-block btn btn-outline-info">Crear cuenta</button>
+            <br>
+            <button type="button" data-dismiss="modal" (click)="cerrar(formRegistro)" class="btn btn-lg btn-block btn btn-outline-danger">Cerrar</button>
+
+
+        </form>
+
+        <div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered bg-danger" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Debe diligenciar el formulario
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+</div>

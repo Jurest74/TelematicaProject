@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+<header>
+
+</header>
+
+<div class="container ">
+  <div class="container">
+<h1 style="margin-left:120px;" class="text-info">Califica<small> nuestros productos</small></h1>
+    <p style="margin-left:120px;" class="lead">Selecciona una o mas opciones haciendo click sobre la imagen de cada producto y envianos tu opinión en el formulario al final de la página.</p>
+  </div>
+</div>
+<br>
+<hr>
+
+<div class="card-columns container">
+
+
+  <div *ngFor="let object of objects" class="card">
+    <label class="checkeable">
+    <input class="checkbox" id="{{object.name}}" type="checkbox"  [value]="object.name" value="{{object.name}}" (change)="onCheckChange($event)" >
+    <img src="{{object.image}}" class="card-img-top" alt="...">
+    </label>
+    <div class="card-body">
+      <h5 class="card-title">{{object.name}}</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+
+    </div>
+  </div>
+
+</div>
+
+
+   <div *ngFor="let object of objects; let i = index">
+      <input type="checkbox" (change)="check(i)" > {{object.name}}
+   </div>
+  <br><br>
+   <hr>
+
+   <h3>Cart</h3>
+
+<p>
+  <a routerLink="/shipping">Shipping Prices</a>
+</p>
+
+
+   <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+
+     <div class="cart-item" *ngFor="let object of objects">
+       <input id="{{object.name}}" type="checkbox"  [value]="object.name" value="{{object.name}}" (change)="onCheckChange($event)" >
+       <span>{{ object.name }} </span>
+       <span>{{ object.price | currency }}</span>
+     </div>
+
+     <div>
+    <label for="name">
+      Name
+    </label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+
+  <div>
+    <label for="address">
+      mensaje
+    </label>
+    <input id="mensaje" type="text" formControlName="mensaje">
+  </div>
+
+  <button class="button" type="submit">Purchase</button>
+
+</form>
+
+
+
+
+
+
+    <br>
