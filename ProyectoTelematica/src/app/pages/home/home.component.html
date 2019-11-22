@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar [email]="mensaje.emailCliente"></app-navbar>
 <header>
 
 </header>
@@ -14,8 +14,7 @@
 
 <div class="card-columns container">
 
-
-  <div *ngFor="let object of objects" class="card">
+  <div *ngFor="let object of objects" class="cardProduct">
     <label class="checkeable">
     <input class="checkbox" id="{{object.name}}" type="checkbox"  [value]="object.name" value="{{object.name}}" (change)="onCheckChange($event)" >
     <img src="{{object.image}}" class="card-img-top" alt="...">
@@ -26,52 +25,71 @@
 
     </div>
   </div>
-
+<br><br>
 </div>
 
 
-   <div *ngFor="let object of objects; let i = index">
-      <input type="checkbox" (change)="check(i)" > {{object.name}}
-   </div>
-  <br><br>
-   <hr>
 
-   <h3>Cart</h3>
+   <form class="login-form" >
 
-<p>
-  <a routerLink="/shipping">Shipping Prices</a>
-</p>
+     <div class="card">
+       <div class="row m-5">
+         <div class="col-lg-8">
+           <div class="card-body form">
+
+             <h3 class="mt-2 mb-4"><i class="fas fa-envelope pr-2"></i>Danos tu opinión:</h3>
+
+             <div class="row">
+
+               <div class="col-md-6">
+                 <div class="md-form mb-0">
+                   <select id="puntaje" class="custom-select">
+ <option selected>Open this select menu</option>
+ <option value="1">1</option>
+ <option value="2">2</option>
+ <option value="3">3</option>
+ <option value="3">4</option>
+ <option value="3">5</option>
+</select>
+<br>
+<div *ngIf="errorpuntaje" class="">
+  <p style="color:red">Debe seleccionar un puntaje</p>
+</div>
+                 </div>
+                 <br>
+               </div>
+
+             </div>
+
+             <div class="row">
+
+               <!-- Grid column -->
+               <div class="col-md-12">
+                 <div class="md-form mb-0">
+                   <textarea id="mensaje"  maxlength="150" class="form-control" placeholder="Opinión" rows="3"></textarea>
+                 </div>
+                 <div *ngIf="errormensaje" class="">
+                   <p style="color:red">Debe escribir una opinión</p>
+                 </div>
+                 <div *ngIf="errorCheck" class="">
+                   <p style="color:red">Debe seleccionar al menos un producto</p>
+                 </div>
+                 <br>
+                 <div *ngIf="enviado" class="alert alert-success" role="alert">
+                    Muchas gracias! su calificación fue enviada con éxito.
+                 </div>
+               </div>
+             </div>
+             <br>
+             <button style="background: #AED0E1; color:#fff; font-weight:600; width:20%" type="button" (click)="enviar()"  class="btn btn-login button">Enviar</button>
+           </div>
+         </div>
+         </div>
+       </div>
 
 
-   <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
-
-     <div class="cart-item" *ngFor="let object of objects">
-       <input id="{{object.name}}" type="checkbox"  [value]="object.name" value="{{object.name}}" (change)="onCheckChange($event)" >
-       <span>{{ object.name }} </span>
-       <span>{{ object.price | currency }}</span>
-     </div>
-
-     <div>
-    <label for="name">
-      Name
-    </label>
-    <input id="name" type="text" formControlName="name">
-  </div>
-
-  <div>
-    <label for="address">
-      mensaje
-    </label>
-    <input id="mensaje" type="text" formControlName="mensaje">
-  </div>
-
-  <button class="button" type="submit">Purchase</button>
 
 </form>
 
 
-
-
-
-
-    <br>
+<app-footer></app-footer>

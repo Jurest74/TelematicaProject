@@ -22,10 +22,12 @@
               Este campo es obligatorio
             </div>
             <br>
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input">
-              <small>Recordarme</small>
-            </label>
+
+              <div *ngIf="ErroLogin" class="alert alert-danger" role="alert">
+
+              Usuario o contraseña incorrecto
+              </div>
+
             <br>
             <button type="submit" class="btn btn-login float-right">Log in</button>
 
@@ -144,7 +146,6 @@ El email ingresado ya se encuentra registrado.
 </div>
 
 <div *ngIf="RegistroConExito" class="alert alert-success" role="alert">
-
 ha sido registrado con Exito.
 </div>
 

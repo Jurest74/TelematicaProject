@@ -12,6 +12,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import * as $ from 'jquery';
+import { AcercadeComponent } from './pages/acercade/acercade.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import * as $ from 'jquery';
     LoginComponent,
     RegistroComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    AcercadeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

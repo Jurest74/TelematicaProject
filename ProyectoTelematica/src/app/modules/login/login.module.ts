@@ -11,15 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginModule {
 
-      ok:string;
-      usuarios:[{
-        _id: string,
-        nombre: string,
-        edad: string,
-        ciudad: string,
-        direccion: string,
-        email: string
-      }]
+          email: string ;
+          password: string;
 
       constructor(){
 

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormArray } from '@angular/forms'
-
+import {NgForm} from '@angular/forms'
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
+
+import { MensajeService } from '../../services/mensaje.service';
+import {MensajeModule} from '../../modules/mensaje/mensaje.module';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +13,12 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  errorpuntaje=false;
+  errormensaje=false;
+  errorCheck=false;
+ ErroEnvio=false;
+ enviado = false;
 
 checkoutForm:FormGroup;
 
@@ -64,25 +74,52 @@ checkoutForm:FormGroup;
 
 objectsCheck = [];
 
+mensaje={
+  emailCliente:null,
+  calificacion:null,
+  mensaje:null,
+  productosSeleccionados:null,
+}
 
-  constructor(private formBuilder: FormBuilder) {
 
-    this.checkoutForm = this.formBuilder.group({
-          name: null,
-          mensaje: null,
-          items:[this.objectsCheck]
-        });
+  constructor(private formBuilder: FormBuilder, private rutaActiva: ActivatedRoute,
+              private mensajeService: MensajeService) {
   }
 
   ngOnInit() {
+    this.mensaje.emailCliente = this.rutaActiva.snapshot.params.email;
   }
 
-  onSubmit(customerData) {
-    // Process checkout data here
-    console.warn('Your order has been submitted', customerData);
-
-    this.checkoutForm.reset();
+  enviar() {
+    let puntaje = $("#puntaje option:selected").val();
+    let mensaje = $("#mensaje").val();
+    let productosselect = this.objectsCheck.toString();
+   if(puntaje=="Open this select menu"){
+  this.errorpuntaje=true;}
+  else if(mensaje==""){console.log("vacio",mensaje);this.errormensaje=true;}
+  else if(productosselect==""){this.errorCheck = true}
+     else{
+       this.errorpuntaje=false;
+       this.errormensaje=false;
+       this.errorCheck=false;
+console.log(mensaje);
+this.mensaje.productosSeleccionados = productosselect;
+this.mensaje.mensaje=mensaje;
+this.mensaje.calificacion=puntaje;
+console.log("this ",this.mensaje);
+this.mensajeService.postMensaje(this.mensaje).subscribe(resp =>{
+  console.log(resp);
+  if(resp){
+    console.log("Enviado")
+    this.enviado = true;
+    //document.getElementById("mensaje").value = "";
   }
+}, (err) =>{
+  console.log("El error es: ",err);
+  console.log("El error es: ",err.error.err.message);
+});
+    }
+    }
 
   onCheckChange(event) {
 

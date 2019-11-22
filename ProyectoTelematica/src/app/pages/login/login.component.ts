@@ -3,8 +3,10 @@ import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms'
 
 import { UsuarioService } from '../../services/usuario.service';
-
 import {UsuarioModule} from '../../modules/usuario/usuario.module';
+
+import { LoginService } from '../../services/login.service';
+import {LoginModule} from '../../modules/login/login.module';
 
 @Component({
   selector: 'app-login',
@@ -32,12 +34,16 @@ registro:Object={
 FormularioLLeno=false;
 ErroEmail=false;
 RegistroConExito=false;
+ErroLogin=false;
 
   error: any;
 
   usuarios: UsuarioModule[]=[];
 
-  constructor(private router: Router, private usuarioService:UsuarioService) {  }
+  loginUser:LoginModule[]=[];
+
+  constructor(private router: Router, private usuarioService:UsuarioService,
+              private loginService:LoginService) {  }
 
   ngOnInit() {
 
@@ -58,11 +64,31 @@ RegistroConExito=false;
   login(form:NgForm){
     if(form.invalid){
       console.log(form);
-      console.log("user", this.usuario);
+      console.log("Invalido");
+      form.reset();
       return;
     }
-   console.log(form);
-    this.router.navigate(['/home']);
+    console.log(form);
+       console.log("valido");
+       console.log("formulario enviado: ",form.value);
+       this.loginService.postLogin(form.value).subscribe(resp =>{
+         console.log(resp);
+         if(resp){
+           console.log("Usuario valido")
+           let email = form.value.email;
+           let pass = form.value.password;
+           this.router.navigate([`/home/${email}`]);
+         }
+         // (<any>$('#ModalRegistro')).modal('hide');
+          form.reset();
+       }, (err) =>{
+         if(err.error.err.message=="Usuario o (contraseña) incorrectos"){
+           this.ErroLogin=true;
+           console.log("error: ",err);
+         }
+         console.log("El error es: ",err);
+         console.log("El error es: ",err.error.err.message);
+       });
   }
 
   registrar(form:NgForm){
