@@ -10,7 +10,7 @@ export class UsuarioService {
 
   user:UsuarioModule;
 
-  private url = 'https://vaso-rest.herokuapp.com';
+  private url = 'vasoyasociados.tk:8080';
 
   constructor(private http: HttpClient) { }
 

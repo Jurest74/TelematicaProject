@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class MensajeService {
   user:MensajeModule;
 
-  private url = 'https://vaso-rest.herokuapp.com';
+  private url = 'vasoyasociados.tk:8080';
 
   constructor(private http: HttpClient) { }
 
