@@ -11,7 +11,7 @@ export class LoginService {
 
   user:LoginModule;
 
-  private url = 'vasoyasociados.tk:8080';
+  private url = 'https//:vaso-rest.herokuapp.com';
 
   constructor(private http: HttpClient) { }
 
