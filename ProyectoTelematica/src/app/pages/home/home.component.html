@@ -15,14 +15,13 @@
 <div class="card-columns container">
 
   <div *ngFor="let object of objects" class="cardProduct">
+    <div class="card-body">
     <label class="checkeable">
     <input class="checkbox" id="{{object.name}}" type="checkbox"  [value]="object.name" value="{{object.name}}" (change)="onCheckChange($event)" >
     <img src="{{object.image}}" class="card-img-top" alt="...">
-    </label>
-    <div class="card-body">
       <h5 class="card-title">{{object.name}}</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-
+      <p class="card-text">{{object.descripcion | slice: 0:100}}...</p>
+      </label>
     </div>
   </div>
 <br><br>
